@@ -2,7 +2,7 @@ import { Children, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, createHashRouter, RouterProvider } from 'react-router-dom'
 import Layout from './components/Layout/Layout';
 import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
@@ -30,12 +30,10 @@ import Orders from './components/Orders/Orders'
 
 
 function App() {
-  
   const queryClient = new QueryClient()
-  const routes = createBrowserRouter([
-
+  const routes = createHashRouter([ 
     {
-      path: '',
+      path: '/',  
       element: <Layout />,
       children: [
         {
@@ -58,7 +56,6 @@ function App() {
           path: 'order',
           element: <Guard><Order /></Guard>
         },
-        
         {
           path: 'categories',
           element: <Guard><Categories /></Guard>
@@ -101,19 +98,17 @@ function App() {
 
   return (
     <>
-    <QueryClientProvider client={queryClient}>
-          <AuthContextProvider>
-              <CartProvider>
-                  <WishlistProvider>
-                      <RouterProvider router={routes} />
-                      <ToastContainer />
-                  </WishlistProvider>
-              </CartProvider>
-          </AuthContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthContextProvider>
+          <CartProvider>
+            <WishlistProvider>
+              <RouterProvider router={routes} />
+              <ToastContainer />
+            </WishlistProvider>
+          </CartProvider>
+        </AuthContextProvider>
       </QueryClientProvider>
     </>
-      
-  
   )
 }
 
