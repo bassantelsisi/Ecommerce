@@ -30,7 +30,7 @@ function PaymentSuccess() {
             } catch (error) {
                 console.error('Error handling payment success:', error);
                 toast.error('There was an error processing your order.');
-                navigate('/allorders');
+                navigate('/cart');
             }
         };
 
@@ -38,7 +38,7 @@ function PaymentSuccess() {
     }, [resetCart, isProcessing]);
 
     const handleViewOrders = () => {
-        window.location.href = '/allorders';
+        navigate('/allorders');
     };
 
     return (
