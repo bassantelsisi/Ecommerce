@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useCart } from '../CartContext/CartContext';
+import { Navigate } from 'react-router-dom';
 
 function PaymentSuccess() {
+    const navigate = useNavigate();
     const { resetCart } = useCart();
     const [isProcessing, setIsProcessing] = useState(true);
 
@@ -28,7 +30,7 @@ function PaymentSuccess() {
             } catch (error) {
                 console.error('Error handling payment success:', error);
                 toast.error('There was an error processing your order.');
-                window.location.href = '/cart';
+                navigate('/allorders');
             }
         };
 
